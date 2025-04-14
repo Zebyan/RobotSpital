@@ -7,7 +7,7 @@ def generate_password(length: int = 12):
     chars = string.ascii_letters + string.digits
     return ''.join(secrets.choice(chars) for _ in range(length)) 
 
-pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
+pwd_context = CryptContext(schemes=['bcrypt'])
 
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
