@@ -1,5 +1,5 @@
 # Use an official Python runtime as the base image
-FROM python:3.13
+FROM python:3.13-slim
 
 # Set working directory in the container
 WORKDIR /app
@@ -11,8 +11,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    gcc \
-    libpq-dev \
+      gcc \
+      libpq-dev \
+      build-essential \
+      python3-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

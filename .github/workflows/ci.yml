@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      SECRET_KEY:    ${{ secrets.SECRET_KEY }}
+      DOCKER_USER:   ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASS:   ${{ secrets.DOCKER_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run migrations
+        run: |
+          alembic upgrade head
+        env:
+          ALEMBIC_DATABASE_URI: ${{ secrets.DATABASE_URL }}
+
+      - name: Run tests
+        run: pytest --maxfail=1 --disable-warnings --quiet
+
+      - name: Log in to Docker Hub
+        run: |
+          echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin
+
+      - name: Build & Push Docker image
+        run: |
+          docker build -t myrepo/robotspital:${{ github.sha }} .
+          docker push myrepo/robotspital:${{ github.sha }}
