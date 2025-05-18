@@ -25,7 +25,7 @@ def upgrade():
         sa.Column('denumire', sa.String(length=50), nullable=False),
         sa.Column('stoc', sa.Integer, nullable=False),
         sa.UniqueConstraint('denumire', name='unique_medicamente_denumire'),
-        sa.CheckConstraint('"Stoc" >= 0', name='check_medicamente_stoc_pozitiv')
+        sa.CheckConstraint('"stoc" >= 0', name='check_medicamente_stoc_pozitiv')
     )
     
 
