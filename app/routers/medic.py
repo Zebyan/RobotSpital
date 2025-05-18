@@ -20,16 +20,6 @@ def vizualizare_pacienti(db: Session = Depends(get_db), access: schemas.Token_Da
     pacienti = db.query(models.Pacienti).all()
     return pacienti
 
-@router.get("/2", response_model=List[schemas.CreatePacient])
-def vizualizare_pacienti(db: Session = Depends(get_db), access: schemas.Token_Data = Depends(oath2.get_current_angajat)):
-    if not utils.verify_medic_rol(access.rol):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail = "Nu aveti access!"
-        )
-
-    pacienti = db.query(models.Pacienti).all()
-    return pacienti
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def adaugare_pacient(pacient: schemas.CreatePacient, db: Session = Depends(get_db), 
