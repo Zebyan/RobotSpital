@@ -72,7 +72,7 @@ class CreateAngajat(BaseModel):
         orm_mode: True
 
 class AngajatLogin(BaseModel):
-    email: EmailStr
+    username:EmailStr
     password: str
     rememberMe: bool = False
 
