@@ -27,6 +27,8 @@ jobs:
           kubectl --kubeconfig=kubeconfig.yaml create secret generic robotspital-secrets \
           --from-literal=DATABASE_URL="${{ secrets.DATABASE_URL }}" \
           --from-literal=SECRET_KEY="${{ secrets.SECRET_KEY }}" \
+          --from-literal=algorithm="${{ secrets.ALGORITHM }}" \
+          --from-literal=access_token_expire_minutes="${{ secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}" \
           --dry-run=client -o yaml | kubectl --kubeconfig=kubeconfig.yaml apply -f - --validate=false
 
       - name: Deploy to Kubernetes

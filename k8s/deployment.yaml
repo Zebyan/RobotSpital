@@ -27,6 +27,16 @@ spec:
                 secretKeyRef:
                   name: robotspital-secrets
                   key: SECRET_KEY
+            - name: algorithm
++                valueFrom:
++                  secretKeyRef:
++                    name: robotspital-secrets
++                    key: algorithm
++              - name: access_token_expire_minutes
++                valueFrom:
++                  secretKeyRef:
++                    name: robotspital-secrets
++                    key: access_token_expire_minutes
           ports:
             - containerPort: 8000
 
