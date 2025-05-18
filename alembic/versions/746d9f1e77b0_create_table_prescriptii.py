@@ -26,7 +26,7 @@ def upgrade() -> None:
         sa.Column('cantitate', sa.INTEGER(), nullable=False),
         sa.Column('CNP',sa.CHAR(length=13), sa.ForeignKey('Pacienti.CNP', ondelete='CASCADE'), nullable=False),
         sa.Column('afectiune', sa.String(length=50)),
-        sa.Column('id_medicament',sa.INTEGER(), sa.ForeignKey('Medicamente.id_medicament', ondelete='CASCADE'), nullable=False) 
+        sa.Column('id_medicament',sa.INTEGER(), sa.ForeignKey('Medicamente.id_medicamente', ondelete='CASCADE'), nullable=False) 
     )
     
 
