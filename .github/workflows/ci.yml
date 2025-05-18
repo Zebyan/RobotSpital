@@ -43,5 +43,5 @@ jobs:
 
       - name: Build & Push Docker image
         run: |
-          docker build -t myrepo/robotspital:${{ github.sha }} .
-          docker push myrepo/robotspital:${{ github.sha }}
+          docker build -t zebyan/main-app/robotspital:${{ github.sha }} .
+          docker push zebyan/main-app/robotspital:${{ github.sha }}
