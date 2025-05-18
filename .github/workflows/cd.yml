@@ -3,13 +3,11 @@ name: CD
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - 'v*.*.*'  # triggers on git tags like v1.0.0
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      KUBECONFIG: ${{ github.workspace }}/kubeconfig.yaml
     steps:
       - uses: actions/checkout@v3
 
@@ -18,18 +16,17 @@ jobs:
 
       - name: Configure kubeconfig
         run: |
-          set -euxo pipefail
-          echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 -d > $KUBECONFIG
+          echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 -d > kubeconfig.yaml
+        env:
+          KUBECONFIG: ${{ github.workspace }}/kubeconfig.yaml
 
       - name: Inject Kubernetes secrets
         run: |
-          set -euxo pipefail
-          kubectl create secret generic robotspital-secrets \
+          kubectl --kubeconfig=kubeconfig.yaml create secret generic robotspital-secrets \
             --from-literal=DATABASE_URL="${{ secrets.DATABASE_URL }}" \
             --from-literal=SECRET_KEY="${{ secrets.SECRET_KEY }}" \
             --dry-run=client -o yaml | kubectl apply -f -
 
       - name: Deploy to Kubernetes
         run: |
-          set -euxo pipefail
-          kubectl apply -f k8s/
+          kubectl --kubeconfig=kubeconfig.yaml apply -f k8s/
