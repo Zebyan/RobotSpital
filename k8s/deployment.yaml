@@ -37,6 +37,11 @@ spec:
                 secretKeyRef:
                   name: robotspital-secrets
                   key: access_token_expire_minutes
+            - name: ALEMBIC_DATABASE_URI
+              valueFrom:
+                secretKeyRef:
+                  name: robotspital-secrets
+                  key: DATABASE_URL
           ports:
             - containerPort: 8000
 
