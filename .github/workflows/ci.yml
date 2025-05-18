@@ -42,6 +42,6 @@ jobs:
           echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin
 
       - name: Build & Push Docker image
-        run: |
-          docker build -t zebyan/main-app/robotspital:${{ github.sha }} .
-          docker push zebyan/main-app/robotspital:${{ github.sha }}
+         run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/robot_spital:${{ github.sha }} .
+          docker push ${{ secrets.DOCKER_USERNAME }}/robot_spital:${{ github.sha }}
