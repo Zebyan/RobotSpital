@@ -43,5 +43,12 @@ jobs:
 
       - name: Build & Push Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/robot_spital:${{ github.sha }} .
-          docker push ${{ secrets.DOCKER_USERNAME }}/robot_spital:${{ github.sha }}
+          IMAGE="${{ secrets.DOCKER_USERNAME }}/robotspital"
+          TAG="${{ github.sha }}"
+          # Build with both tags
+          docker build -t $IMAGE:$TAG -t $IMAGE:latest .
+          # Push both
+          echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin
+          docker push $IMAGE:$TAG
+          docker push $IMAGE:latest
+
