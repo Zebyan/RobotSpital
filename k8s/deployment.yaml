@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: backend
-          image: myrepo/robotspital:latest
+          image: zebyan/robotspital:latest
+          imagePullPolicy: Always
           env:
             - name: DATABASE_URL
               valueFrom:
