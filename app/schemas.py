@@ -74,7 +74,7 @@ class CreateAngajat(BaseModel):
 class AngajatLogin(BaseModel):
     email: EmailStr
     password: str
-    rememberMe: Optional[bool]
+    rememberMe: bool = False
 
 class Token(BaseModel):
     access_token: str
