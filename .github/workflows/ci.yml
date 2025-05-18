@@ -10,25 +10,29 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      SECRET_KEY:    ${{ secrets.SECRET_KEY }}
-      DOCKER_USER:   ${{ secrets.DOCKER_USERNAME }}
-      DOCKER_PASS:   ${{ secrets.DOCKER_PASSWORD }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      ALGORITHM: ${{ secrets.ALGORITHM }}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${{ secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}
+      DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
+
     steps:
       - uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.13'
+          python-version: '3.10' 
 
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run migrations
+      - name: Set Alembic DB URL
         run: |
-          alembic upgrade head
-        env:
-          ALEMBIC_DATABASE_URI: ${{ secrets.DATABASE_URL }}
+          echo "ALEMBIC_DATABASE_URI=${DATABASE_URL}" >> $GITHUB_ENV
+
+      - name: Run migrations
+        run: alembic upgrade head
 
       - name: Run tests
         run: pytest --maxfail=1 --disable-warnings --quiet
