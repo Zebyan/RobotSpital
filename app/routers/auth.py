@@ -9,7 +9,7 @@ router = APIRouter(
 )
 
 @router.post('/login')
-def login (date_angajat: schemas.AngajatLogin,db: Session = Depends(database.get_db)):
+def login (date_angajat: OAuth2PasswordRequestForm = Depends(),db: Session = Depends(database.get_db)):
     db_angajat = db.query(models.Angajati).filter(models.Angajati.email == date_angajat.username).first()
     if not db_angajat: 
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Utilizatorul sau parola nu exista!")

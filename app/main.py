@@ -21,5 +21,5 @@ app.include_router(auth.router)
 @app.get("/")
 async def root ():
     print('abv')
-    return {"message": "Hello world v3.0"}
+    return {"message": "Hello world v4.0"}
 
