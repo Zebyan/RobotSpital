@@ -10,7 +10,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],            # or a list of allowed origins
+    allow_origins=["https://mediportal-haven.lovable.app/"],            # or a list of allowed origins
     allow_credentials=True,
     allow_methods=["*"],            # or specific ["GET", "POST", ...]
     allow_headers=["*"],            # or specific headers
