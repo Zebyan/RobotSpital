@@ -12,7 +12,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["https://mediportal-haven.lovable.app"],            # or a list of allowed origins
     allow_credentials=True,
-    allow_methods=["GET", "POST","PUT","OPTIONS"],            # or specific ["GET", "POST", ...]
+    allow_methods=["GET", "POST","PUT","DELETE","OPTIONS"],            # or specific ["GET", "POST", ...]
     allow_headers=["*"],            # or specific headers
 )
 
