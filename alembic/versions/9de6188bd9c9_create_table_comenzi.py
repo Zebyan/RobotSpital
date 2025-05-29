@@ -20,7 +20,7 @@ depends_on: Union[str, Sequence[str], None] = None
 status_enum = sa.Enum('Plasata','InProcesare','InTranzit','Livrata', name='status_enum')
 
 def upgrade() -> None:
-    status_enum.create(op.get_bind())
+    #status_enum.create(op.get_bind())
     op.create_table(
         'Comenzi',
         sa.Column('id_comanda', sa.INTEGER, primary_key=True, autoincrement=True),
