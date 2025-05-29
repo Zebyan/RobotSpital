@@ -84,5 +84,6 @@ class Token_Data(BaseModel):
     rol:str
 
 class Medicamente:
+    id_medicament: int
     denumire: str
     stoc: int
