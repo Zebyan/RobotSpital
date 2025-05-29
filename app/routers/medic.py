@@ -109,3 +109,31 @@ def vizualizare_medicamente(db: Session = Depends(get_db), access: schemas.Token
 
     pacienti = db.query(models.Medicamente).all()
     return pacienti
+
+@router.post("/medicamente", status_code=status.HTTP_201_CREATED)
+def adaugare_pacient(medicament: schemas.Medicamente, db: Session = Depends(get_db), 
+                     access: schemas.Token_Data = Depends(oath2.get_current_angajat)):
+    
+    if not utils.verify_medic_rol(access.rol):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail = "Nu aveti access!"
+        )
+
+    exist_medicament = db.query(models.Medicamente).filter(models.Medicamente.id_medicament == medicament.id_medicament).first()
+    if exist_medicament:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Medicamentul deja exista!"
+        )
+    db_medicament = models.Medicamente(
+        id_medicamente = exist_medicament.id_medicament,
+        denumire = exist_medicament.denumire,
+        stoc = exist_medicament.stoc
+    )
+    
+    print(access)
+    db.add(db_medicament)
+    db.commit()
+    db.refresh(db_medicament)
+    return {"message":"Medicamentul a fost adaugat!"}
