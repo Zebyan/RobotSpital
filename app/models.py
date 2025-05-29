@@ -32,9 +32,9 @@ class Pacienti(Base):
     rh = Column(Enum('pozitiv', 'negativ', name='rh_enum'), nullable=False)
     id_pat = Column(CHAR(3), nullable=False)
 
-    class Medicamente(Base):
-        __tablename__ = 'Medicamente'
+class Medicamente(Base):
+    __tablename__ = 'Medicamente'
 
-        id_medicament = Column(Integer, primary_key=True, nullable=False)
-        denumire = Column(String, nullable=False)
-        stoc = Column(Integer, primary_key=True)
+    id_medicament = Column(Integer, primary_key=True, nullable=False)
+    denumire = Column(String, nullable=False)
+    stoc = Column(Integer, primary_key=True)
