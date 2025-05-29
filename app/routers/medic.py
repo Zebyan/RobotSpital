@@ -111,7 +111,7 @@ def vizualizare_medicamente(db: Session = Depends(get_db), access: schemas.Token
     return pacienti
 
 @router.post("/medicamente", status_code=status.HTTP_201_CREATED)
-def adaugare_pacient(medicament: schemas.Medicamente, db: Session = Depends(get_db), 
+def adaugare_medicament(medicament: schemas.Medicamente, db: Session = Depends(get_db), 
                      access: schemas.Token_Data = Depends(oath2.get_current_angajat)):
     
     if not utils.verify_medic_rol(access.rol):
