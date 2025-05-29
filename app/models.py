@@ -31,3 +31,10 @@ class Pacienti(Base):
     grupa_sange = Column(Enum('A','B','AB','O', name='grupa_sange_enum'), nullable=False)
     rh = Column(Enum('pozitiv', 'negativ', name='rh_enum'), nullable=False)
     id_pat = Column(CHAR(3), nullable=False)
+
+    class Medicamente(Base):
+        __tablename__ = 'Medicamente'
+
+        id_medicament = Column(Integer, primary_key=True, nullable=False)
+        denumire = Column(String, nullable=False)
+        stoc = Column(Integer, primary_key=True)

@@ -97,3 +97,15 @@ def sterge_pacient(CNP: str, db: Session = Depends(get_db),
     db.delete(pacient)
     db.commit()
     return{"mesaj": "Pacientul a fost sters!"}
+
+
+@router.get("/medicamente", response_model=List[schemas.Medicamente])
+def vizualizare_medicamente(db: Session = Depends(get_db), access: schemas.Token_Data = Depends(oath2.get_current_angajat)):
+    if not utils.verify_medic_rol(access.rol):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail = "Nu aveti access!"
+        )
+
+    pacienti = db.query(models.Medicamente).all()
+    return pacienti
