@@ -20,6 +20,6 @@ app.include_router(medic.router)
 app.include_router(auth.router)
 @app.get("/")
 async def root ():
-    print('abv')
+    print('main')
     return {"message": "Hello world v5.0"}
 
