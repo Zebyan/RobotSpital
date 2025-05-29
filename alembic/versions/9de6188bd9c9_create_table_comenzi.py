@@ -26,7 +26,7 @@ def upgrade() -> None:
         sa.Column('data', sa.DateTime),
         sa.Column('id_angajat', sa.Integer, sa.ForeignKey('Angajati.id_angajat', ondelete='CASCADE'), nullable=False),
         sa.Column('id_pat', sa.CHAR(3)),
-        sa.Column('status', sa.Enum('Plasata','InProcesare','InTranzit','Livrata')),
+        sa.Column('status', sa.Enum('Plasata','InProcesare','InTranzit','Livrata', __name__=Status_enum')),
         sa.Column('id_prescriptie', sa.Integer, sa.ForeignKey('Prescriptii.id_prescriptie', ondelete='CASCADE'))
     )
 
