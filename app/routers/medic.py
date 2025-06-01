@@ -127,9 +127,9 @@ def adaugare_medicament(medicament: schemas.Medicamente, db: Session = Depends(g
             detail="Medicamentul deja exista!"
         )
     db_medicament = models.Medicamente(
-        id_medicamente = exist_medicament.id_medicament,
-        denumire = exist_medicament.denumire,
-        stoc = exist_medicament.stoc
+        id_medicamente = medicament.id_medicament,
+        denumire = medicament.denumire,
+        stoc = medicament.stoc
     )
     
     print(access)

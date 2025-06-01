@@ -12,6 +12,8 @@ spec:
       labels:
         app: robotspital
     spec:
+      nodeSelector:
+        agentpool: lightnp 
       containers:
         - name: backend
           image: zebyan/robotspital:latest

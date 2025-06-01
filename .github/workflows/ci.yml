@@ -34,9 +34,6 @@ jobs:
       - name: Run migrations
         run: alembic upgrade head
 
-     # - name: Run tests
-      #  run: pytest --maxfail=1 --disable-warnings --quiet
-
       - name: Log in to Docker Hub
         run: |
           echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin
