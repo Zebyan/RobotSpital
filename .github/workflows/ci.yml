@@ -49,23 +49,4 @@ jobs:
           echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin
           docker push $IMAGE:$TAG
           docker push $IMAGE:latest
-            - name: Set up kubectl
-        run: |
-          echo "${{ secrets.KUBE_CONFIG_DATA }}" | base64 -d > kubeconfig.yaml
-          chmod 600 kubeconfig.yaml
-
-      - name: Create or update Kubernetes secret
-        run: |
-          kubectl --kubeconfig=kubeconfig.yaml delete secret robotspital-secrets --ignore-not-found
-          kubectl --kubeconfig=kubeconfig.yaml create secret generic robotspital-secrets \
-            --from-literal=EMAIL_PASSWORD="$EMAIL_PASSWORD" \
-            --from-literal=DATABASE_URL="$DATABASE_URL" \
-            --from-literal=SECRET_KEY="$SECRET_KEY" \
-            --from-literal=algorithm="$ALGORITHM" \
-            --from-literal=access_token_expire_minutes="$ACCESS_TOKEN_EXPIRE_MINUTES"
-
-      - name: Restart RobotSpital deployment
-        run: |
-          kubectl --kubeconfig=kubeconfig.yaml rollout restart deployment robotspital
-
 
