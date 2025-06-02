@@ -20,7 +20,8 @@ spec:
           imagePullPolicy: Always
           env:
             - name: EMAIL_PASSWORD
-              secretKeyRef:
+              valueFrom:
+                secretKeyRef:
                   name: robotspital-secrets
                   key: EMAIL_PASSWORD
             - name: DATABASE_URL
