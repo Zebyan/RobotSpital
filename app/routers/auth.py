@@ -19,7 +19,7 @@ def login (date_angajat: schemas.AngajatLogin,db: Session = Depends(database.get
     if not utils.verify_password(date_angajat.password, db_angajat.parola): 
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Utilizatorul sau parola nu exista!")
 
-    access_token = oath2.create_access_token(data = {"rol": db_angajat.rol, "nume": db_angajat.nume})
+    access_token = oath2.create_access_token(data = {"rol": db_angajat.rol, "nume": db_angajat.nume, "id": db_angajat.id_angajat})
 
     return {"access_token": access_token, "token_type": "bearer"}
 
