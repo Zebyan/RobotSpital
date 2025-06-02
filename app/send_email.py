@@ -2,7 +2,7 @@ import smtplib
 from email.message import EmailMessage
 
 def send_email(to_email: str, body: str, from_password: str):
-    from_email = "your_email@gmail.com"
+    from_email = "proiectip@yahoo.com"
     subject = "Cont nou creat - Date autentificare"
 
     msg = EmailMessage()
