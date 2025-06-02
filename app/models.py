@@ -1,5 +1,5 @@
 from .database import Base
-from sqlalchemy import Column, String, Integer, Enum, CHAR, Time, DateTime
+from sqlalchemy import Column, String, Integer, Enum, CHAR, Time, DateTime, BOOLEAN
 
 class Angajati(Base):
     __tablename__ = 'Angajati'
@@ -57,3 +57,10 @@ class Comenzi (Base):
     id_angajat = Column(Integer, nullable=False)
     id_pat = Column(CHAR(3), nullable=False)
     status = Column(Enum('Plasata','InProcesare','InTranzit','Livrata', name='status_enum'), nullable=False)
+
+class Paturi (Base):
+    __tablename__ = 'Paturi'
+
+    id_pat = Column(CHAR(3), primary_key=True, nullable=False)
+    ocupat = Column(BOOLEAN)
+    nr_salon = Column (Integer)
