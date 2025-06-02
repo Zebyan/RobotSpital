@@ -94,3 +94,10 @@ class Prescriptii (BaseModel):
     CNP: str
     afectiune: str
     id_medicament: int
+
+class Creare_Prescriptii (BaseModel):
+    id_prescriptie: int
+    cantitate: int
+    CNP: str
+    afectiune=Optional[str] = Field(default=None)
+    id_medicament: int
