@@ -50,7 +50,7 @@ def adaugare_prescriptie(prescriptii: schemas.Creare_Prescriptii, db: Session = 
     return {"message":"Prescriptia a fost creata!"}
 
 @router.put("/{id_prescriptie}",response_model=schemas.Creare_Prescriptii, status_code=status.HTTP_202_ACCEPTED)
-def editare_pacient(id_prescriptie: int, prescriptie: schemas.Prescriptii, db: Session = Depends(get_db),
+def editare_prescriptie(id_prescriptie: int, prescriptie: schemas.Prescriptii, db: Session = Depends(get_db),
                     access: schemas.Token_Data = Depends(oath2.get_current_angajat)):
     if not utils.verify_medic_rol(access.rol):
         raise HTTPException(
