@@ -38,3 +38,12 @@ class Medicamente(Base):
     id_medicament = Column(Integer, primary_key=True, nullable=False)
     denumire = Column(String, nullable=False)
     stoc = Column(Integer, primary_key=True)
+
+class Prescriptii(Base):
+    __tablename__ = 'Prescriptii'
+
+    id_prescriptie = Column(Integer, primary_key=True, nullable=False)
+    cantitate = Column(String, nullable=False)
+    CNP = Column(CHAR(13), primary_key=True, nullable=False)
+    afectiune = Column(String)
+    id_medicament = Column(Integer, unique=True, nullable=False)

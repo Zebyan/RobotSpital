@@ -87,3 +87,10 @@ class Medicamente (BaseModel):
     id_medicament: int
     denumire: str
     stoc: int 
+
+class Prescriptii (BaseModel):
+    id_prescriptie: int
+    cantitate: int
+    CNP: str
+    afectiune: str
+    id_medicament: int
