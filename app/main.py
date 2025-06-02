@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .routers import medic, auth, prescriptii
+from .routers import medic, auth, prescriptii, comenzi
 from .database import engine
 from .models import Base
 from fastapi.middleware.cors import CORSMiddleware
@@ -19,6 +19,7 @@ app.add_middleware(
 app.include_router(medic.router)
 app.include_router(auth.router)
 app.include_router(prescriptii.router)
+app.include_router(comenzi.router)
 @app.get("/")
 async def root ():
     print('main')

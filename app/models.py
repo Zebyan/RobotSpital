@@ -1,5 +1,5 @@
 from .database import Base
-from sqlalchemy import Column, String, Integer, Enum, CHAR
+from sqlalchemy import Column, String, Integer, Enum, CHAR, Time, DateTime
 
 class Angajati(Base):
     __tablename__ = 'Angajati'
@@ -47,3 +47,13 @@ class Prescriptii(Base):
     CNP = Column(CHAR(13), primary_key=True, nullable=False)
     afectiune = Column(String)
     id_medicament = Column(Integer, unique=True, nullable=False)
+
+class Comenzi (Base):
+    __tablename__ = 'Comenzi'
+
+    id_comanda = Column(Integer, primary_key=True, nullable=False)
+    ora = Column(Time, nullable=False)
+    data = Column(DateTime, nullable=False)
+    id_angajat = Column(Integer, nullable=False)
+    id_pat = Column(CHAR(3), nullable=False)
+    status = Column(Enum('Plasata','InProcesare','InTranzit','Livrata', name='status_enum'), nullable=False)
