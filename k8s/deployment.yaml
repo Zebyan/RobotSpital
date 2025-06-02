@@ -19,6 +19,10 @@ spec:
           image: zebyan/robotspital:latest
           imagePullPolicy: Always
           env:
+            - name: EMAIL_PASSWORD
+              secretKeyRef:
+                  name: email-credentials
+                  key: EMAIL_PASSWORD
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
