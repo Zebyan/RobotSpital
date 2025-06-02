@@ -1,4 +1,4 @@
-from .. import models, schemas, oath2, utils
+from .. import models, schemas, oath2
 from fastapi import Depends, status, HTTPException, APIRouter
 from typing import List
 from sqlalchemy.orm import Session
@@ -11,7 +11,7 @@ router = APIRouter(
 
 @router.get("/", response_model=List[schemas.Creare_Comenzi])
 def vizualizare_comenzi(db: Session = Depends(get_db), angajat: models.Angajati = Depends(oath2.get_current_angajat)):
-    comenzi = db.query(models.Comenzi).filter(models.Comenzi.id_angajat == angajat.id).all()
+    comenzi = db.query(models.Comenzi).filter(models.Comenzi.id_angajat == angajat.id_angajat).all()
     return comenzi
 
 

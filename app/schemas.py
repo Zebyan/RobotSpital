@@ -1,6 +1,6 @@
 from pydantic import BaseModel, validator, ValidationError, EmailStr, Field
 from typing import Optional
-
+import time, datetime
 
 class CreatePacient(BaseModel):
     CNP: str
@@ -101,3 +101,15 @@ class Creare_Prescriptii (BaseModel):
     CNP: str
     afectiune: Optional[str] = Field(default=None)
     id_medicament: int
+
+class Creare_Comenzi (BaseModel):
+    id_comanda: int
+    ora: time
+    data: datetime
+    id_angajat: int
+    id_pat: str
+    status: str
+    id_prescriptie: int
+    class Config:
+        orm_mode = True
+
