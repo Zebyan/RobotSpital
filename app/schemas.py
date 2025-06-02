@@ -113,3 +113,6 @@ class Creare_Comenzi (BaseModel):
     class Config:
         orm_mode = True
 
+class Status_Comanda (BaseModel):
+    status: str
+

@@ -51,7 +51,7 @@ def create_angajat(angajat: schemas.CreateAngajat,db: Session = Depends(database
     return db_angajat
 
 @router.get("/angajati", response_model=List[schemas.CreateAngajat])
-def vizualizare_pacienti(db: Session = Depends(database.get_db)):
+def vizualizare_angajati(db: Session = Depends(database.get_db)):
 
     db_angajat = db.query(models.Angajati).all()
     return db_angajat

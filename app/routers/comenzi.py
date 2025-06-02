@@ -39,3 +39,8 @@ def adaugare_comanda(comenzi: schemas.Creare_Comenzi, db: Session = Depends(get_
     db.commit()
     db.refresh(db_comenzi)
     return db_comenzi
+
+@router.get("/status", response_model=List[schemas.Status_Comanda])
+def status_comanda(db: Session = Depends(get_db), angajat: models.Angajati = Depends(oath2.get_current_angajat)):
+    db_status_comenzi = db.query(models.Comenzi).filter(models.Comenzi.id_angajat == angajat.id).all()
+    return db_status_comenzi
