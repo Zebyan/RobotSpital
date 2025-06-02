@@ -86,4 +86,4 @@ class Token_Data(BaseModel):
 class Medicamente (BaseModel):
     id_medicament: int
     denumire: str
-    stoc: int
+    stoc: int 
