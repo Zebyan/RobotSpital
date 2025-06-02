@@ -1,5 +1,5 @@
 from .database import Base
-from sqlalchemy import Column, String, Integer, Enum, CHAR, Time, DateTime, BOOLEAN
+from sqlalchemy import Column, String, Integer, Enum, CHAR, Time, DateTime, BOOLEAN, ForeignKey
 
 class Angajati(Base):
     __tablename__ = 'Angajati'
@@ -57,6 +57,7 @@ class Comenzi (Base):
     id_angajat = Column(Integer, nullable=False)
     id_pat = Column(CHAR(3), nullable=False)
     status = Column(Enum('Plasata','InProcesare','InTranzit','Livrata', name='status_enum'), nullable=False)
+    id_prescriptie = Column(Integer, ForeignKey("Prescriptii.id_prescriptie"))
 
 class Paturi (Base):
     __tablename__ = 'Paturi'
