@@ -137,3 +137,24 @@ def adaugare_medicament(medicament: schemas.Medicamente, db: Session = Depends(g
     db.commit()
     db.refresh(db_medicament)
     return {"message":"Medicamentul a fost adaugat!"}
+
+@router.put("/medicamente{id_medicament}",response_model=schemas.Medicamente, status_code=status.HTTP_202_ACCEPTED)
+def editare_pacient(id_medicament: int, medicament: schemas.Medicamente, db: Session = Depends(get_db),
+                    access: schemas.Token_Data = Depends(oath2.get_current_angajat)):
+    if not utils.verify_medic_rol(access.rol):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail = "Nu aveti access!"
+        )
+    
+    db_medicament = db.query(models.Medicamente).filter(models.Medicamente.id_medicament == id_medicament).first()
+    if db_medicament is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Medicamentul nu exista!"
+        )
+    for field, value in medicament.dict(exclude_unset=True).items():
+        setattr(db_medicament, field, value)
+    db.commit()
+    db.refresh(db_medicament)
+    return db_medicament
