@@ -21,7 +21,7 @@ spec:
           env:
             - name: EMAIL_PASSWORD
               secretKeyRef:
-                  name: email-credentials
+                  name: robotspital-secrets
                   key: EMAIL_PASSWORD
             - name: DATABASE_URL
               valueFrom:
