@@ -8,10 +8,12 @@ router = APIRouter(
     prefix = "/comenzi",
     tags = ["Comenzi"]
 )
-
 @router.get("/", response_model=List[schemas.Creare_Comenzi])
-def vizualizare_comenzi(db: Session = Depends(get_db), angajat: models.Angajati = Depends(oath2.get_current_angajat)):
-    comenzi = db.query(models.Comenzi).filter(models.Comenzi.id_angajat == angajat.id_angajat).all()
+def vizualizare_comenzi(
+    db: Session = Depends(get_db),
+    angajat: schemas.Token_Data = Depends(oath2.get_current_angajat)
+):
+    comenzi = db.query(models.Comenzi).filter(models.Comenzi.id_angajat == angajat.id).all()
     return comenzi
 
 

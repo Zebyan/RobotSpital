@@ -22,14 +22,16 @@ def create_access_token(data: dict):
 def verify_access_token(token: str, credentials_exception):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=ALGORITHM)
-        #nume: str = payload.get("nume")
         rol: str = payload.get("rol")
-        if rol is None:
+        id: int = payload.get("id")  
+
+        if rol is None or id is None:
             raise credentials_exception
-        token_data = schemas.Token_Data(rol=rol)
+
+        token_data = schemas.Token_Data(rol=rol, id=id)
     except InvalidTokenError:
         raise credentials_exception
-    
+
     return token_data
     
 def get_current_angajat(token: str = Depends(oath2_scheme)):
