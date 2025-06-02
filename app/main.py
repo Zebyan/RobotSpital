@@ -22,5 +22,5 @@ app.include_router(prescriptii.router)
 @app.get("/")
 async def root ():
     print('main')
-    return {"message": "Hello world v5.0"}
+    return {"message": "Hello world v7.0"}
 
