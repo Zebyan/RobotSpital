@@ -1,7 +1,7 @@
 import smtplib
 from email.message import EmailMessage
 
-def send_email(to_email: str, body: str, from_password: str):
+def send_email_notification(to_email: str, body: str, from_password: str):
     from_email = "proiectip@yahoo.com"
     subject = "Cont nou creat - Date autentificare"
 

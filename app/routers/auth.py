@@ -45,7 +45,7 @@ def create_angajat(angajat: schemas.CreateAngajat,db: Session = Depends(database
     
     try:
         email_body = f"Bună {angajat.nume},\n\nContul tău a fost creat.\nParola ta este: {random_password}\n\n"
-        send_email(to_email=angajat.email, body=email_body, from_password=email_password)
+        send_email.send_email_notification(to_email=angajat.email, body=email_body, from_password=email_password)
     except Exception as e:
         print("Eroare la trimiterea emailului:", e)
     return db_angajat
