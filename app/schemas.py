@@ -1,6 +1,7 @@
 from pydantic import BaseModel, validator, ValidationError, EmailStr, Field
 from typing import Optional
 from datetime import datetime, time
+from enum import Enum as PyEnum
 
 class CreatePacient(BaseModel):
     CNP: str
@@ -103,13 +104,21 @@ class Creare_Prescriptii (BaseModel):
     afectiune: Optional[str] = Field(default=None)
     id_medicament: int
 
+
+class StatusEnum(str, PyEnum):
+    Plasata = "Plasata",
+    Inprocesare = "InProcesare",
+    InTranzit = "InTranzit",
+    Livrata = "Livrata"
+
+
 class Creare_Comenzi (BaseModel):
     id_comanda: int
     ora: time
     data: datetime
     id_angajat: int
     id_pat: str
-    status: str
+    status: StatusEnum
     id_prescriptie: int
     class Config:
         orm_mode = True
