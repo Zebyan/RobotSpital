@@ -12,7 +12,7 @@ def send_email(to_email: str, body: str, from_password: str):
     msg.set_content(body)
 
     try:
-        with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
+        with smtplib.SMTP('smtp.mail.yahoo.com', 587) as smtp:
             smtp.starttls()
             smtp.login(from_email, from_password)
             smtp.send_message(msg)
