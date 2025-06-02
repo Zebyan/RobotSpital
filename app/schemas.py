@@ -82,7 +82,7 @@ class Token(BaseModel):
 
 class Token_Data(BaseModel):
     rol:str
-    id_angajat: Optional [ int ] = None
+    id_angajat: int
 
 class Medicamente (BaseModel):
     id_medicament: int
