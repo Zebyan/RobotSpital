@@ -82,7 +82,7 @@ class Token(BaseModel):
 
 class Token_Data(BaseModel):
     rol:str
-    id_angajat: int
+    id: int
 
 class Medicamente (BaseModel):
     id_medicament: int

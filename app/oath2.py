@@ -24,13 +24,13 @@ def verify_access_token(token: str, credentials_exception):
         payload = jwt.decode(token, SECRET_KEY, algorithms=ALGORITHM)
         print("Payload:", payload)
         rol: str = payload.get("rol")
-        id_angajat: int = payload.get("id_angajat") 
+        id: int = payload.get("id") 
          
 
-        if rol is None or id_angajat is None:
+        if rol is None or id is None:
             raise credentials_exception
 
-        token_data = schemas.Token_Data(rol=rol, id_angajat=id_angajat)
+        token_data = schemas.Token_Data(rol=rol, id=id)
     except InvalidTokenError:
         raise credentials_exception
 
