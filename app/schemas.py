@@ -1,6 +1,6 @@
 from pydantic import BaseModel, validator, ValidationError, EmailStr, Field
 from typing import Optional
-import time, datetime
+from datetime import datetime, time
 
 class CreatePacient(BaseModel):
     CNP: str
