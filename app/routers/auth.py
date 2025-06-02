@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from .. import database, models, utils, oath2, schemas
 from fastapi.security.oauth2 import OAuth2PasswordRequestForm
 from sqlalchemy.exc import IntegrityError
+from typing import List
 
 router = APIRouter(
     tags=['Login']
@@ -40,4 +41,10 @@ def create_angajat(angajat: schemas.CreateAngajat,db: Session = Depends(database
     except IntegrityError:
         db.rollback()
         raise HTTPException(status_code=400, detail="Email deja folosit!")
+    return db_angajat
+
+@router.get("/angajati", response_model=List[schemas.CreateAngajat])
+def vizualizare_pacienti(db: Session = Depends(database.get_db)):
+
+    db_angajat = db.query(models.Angajati).all()
     return db_angajat
