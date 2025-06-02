@@ -25,7 +25,7 @@ def upgrade() -> None:
     op.create_foreign_key(
         'fk_comenzi_id_pat',  # constraint name
         'Comenzi',            # source table
-        'Pat',                # referent table
+        'Paturi',                # referent table
         ['id_pat'],           # local column
         ['id_pat']                # referent column
     )
