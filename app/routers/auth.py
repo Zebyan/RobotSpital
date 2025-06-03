@@ -25,7 +25,7 @@ def login (date_angajat: schemas.AngajatLogin,db: Session = Depends(database.get
 
 
 @router.post("/angajati", status_code=status.HTTP_201_CREATED)
-def create_angajat(angajat: schemas.CreateAngajat,db: Session = Depends(database.get_db)):
+def creare_angajat(angajat: schemas.CreateAngajat,db: Session = Depends(database.get_db)):
     random_password = utils.generate_password()
     email_password = os.environ["EMAIL_PASSWORD"]
     print(random_password)

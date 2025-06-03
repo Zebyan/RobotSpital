@@ -139,7 +139,7 @@ def adaugare_medicament(medicament: schemas.Medicamente, db: Session = Depends(g
     return {"message":"Medicamentul a fost adaugat!"}
 
 @router.put("/medicamente{id_medicament}",response_model=schemas.Medicamente, status_code=status.HTTP_202_ACCEPTED)
-def editare_pacient(id_medicament: int, medicament: schemas.Medicamente, db: Session = Depends(get_db),
+def editare_medicament(id_medicament: int, medicament: schemas.Medicamente, db: Session = Depends(get_db),
                     access: schemas.Token_Data = Depends(oath2.get_current_angajat)):
     if not utils.verify_medic_rol(access.rol):
         raise HTTPException(

@@ -34,7 +34,7 @@ def adaugare_prescriptie(prescriptii: schemas.Creare_Prescriptii, db: Session = 
     if exist_prescriptii:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Pacientul deja exista!"
+            detail="Prescriptia deja exista!"
         )
     db_prescriptii = models.Prescriptii(id_prescriptie= prescriptii.id_prescriptie, 
                               cantitate = prescriptii.cantitate,
@@ -80,7 +80,7 @@ def sterge_prescriptie(id_prescriptie: int, db: Session = Depends(get_db),
         )
     db_prescriptii = db.query(models.Prescriptii).filter(models.Prescriptii.id_prescriptie == id_prescriptie).first()
     if not db_prescriptii:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Pacientul nu exista!!")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Prescriptia nu exista!!")
     
     db.delete(id_prescriptie)
     db.commit()
