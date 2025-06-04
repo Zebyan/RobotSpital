@@ -12,8 +12,6 @@ spec:
       labels:
         app: robotspital
     spec:
-      nodeSelector:
-        agentpool: lightnp 
       containers:
         - name: backend
           image: zebyan/robotspital:latest
@@ -51,4 +49,3 @@ spec:
                   key: DATABASE_URL
           ports:
             - containerPort: 8000
-
