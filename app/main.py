@@ -23,5 +23,5 @@ app.include_router(comenzi.router)
 @app.get("/")
 async def root ():
     print('main')
-    return {"message": "Hello world v7.0"}
+    return {"message": "Version 1.2.11"}
 
